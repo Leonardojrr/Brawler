@@ -1,3 +1,36 @@
-p {
-	font-family: 'Press Start 2P', cursive;
+html {
+  background: url(assets/wallpaper.jpg) no-repeat; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+
+#menu {
+	font-family: 'Press Start 2P', cursive;
+	text-align: center;
+}
+
+#single:hover, #multi:hover, #quit:hover, #settings:hover {
+	transition-duration: 0.1s;
+	color: red;
+	cursor: pointer;
+}
+
+#single, #multi, #quit, #settings {
+	transition-duration: 0.1s;
+	font-family: 'Press Start 2P', cursive;
+	position: relative;
+	margin-top: 0.5rem;
+	top: 5rem;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+#logo {
+	position: relative;
+	top: 5rem;
+	font-size: 3.5rem;
+}
+
+
