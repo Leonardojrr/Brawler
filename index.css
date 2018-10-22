@@ -6,6 +6,24 @@ html {
   background-size: cover;
 }
 
+@keyframes hide {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes show {
+	from { opacity: 0; }
+	to {opacity: 1; }
+}
+
+.hidden {
+	animation: hide 0.5s forwards;
+}
+
+.shown {
+	animation: show 0.5s forwards;
+}
+
 #menu {
 	font-family: 'Press Start 2P', cursive;
 	text-align: center;
@@ -15,6 +33,10 @@ html {
 	transition-duration: 0.1s;
 	color: red;
 	cursor: pointer;
+}
+
+#single:focus, #multi:focus, #quit:focus, #settings:focus {
+	outline: 0;
 }
 
 #single, #multi, #quit, #settings {
