@@ -1,9 +1,22 @@
-html {
-  background: url(assets/wallpaper.jpg) no-repeat center center fixed; 
+#game {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+  background: url(assets/1.png) no-repeat center bottom fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  transition: background 0.5s linear;
 }
 
 @keyframes hide {
@@ -17,11 +30,11 @@ html {
 }
 
 .hidden {
-	animation: hide 0.5s forwards;
+	animation: hide 0.4s forwards;
 }
 
 .shown {
-	animation: show 0.5s forwards;
+	animation: show 0.4s forwards;
 }
 
 #menu {
@@ -29,17 +42,17 @@ html {
 	text-align: center;
 }
 
-#single:hover, #multi:hover, #quit:hover, #settings:hover {
+button:hover {
 	transition-duration: 0.1s;
-	color: red;
+	color: red !important;
 	cursor: pointer;
 }
 
-#single:focus, #multi:focus, #quit:focus, #settings:focus {
+button:focus {
 	outline: 0;
 }
 
-#single, #multi, #quit, #settings {
+button {
 	transition-duration: 0.1s;
 	font-family: 'Press Start 2P', cursive;
 	position: relative;
