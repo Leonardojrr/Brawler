@@ -4,10 +4,14 @@ var multi = document.getElementById('multi');
 var	settings = document.getElementById('settings');
 var quit = document.getElementById('quit');
 var game = document.getElementById('game');
+var menu = document.getElementById('menu');
+var scene = document.getElementById('scene');
+scene.style.visibility = 'hidden';
+var ryu = new Array();
 
 var counter = 1;
 
-setInterval(function() {
+var menuRotate = setInterval(function() {
 	counter++;
 	console.log(counter);
 	game.style.backgroundImage = "url(assets/" + counter + ".png)";
@@ -27,32 +31,32 @@ setInterval(function() {
 		quit.style.color = "black";
 	}
 	if (counter == 11) { counter = 0; }
-}, 5000)
-
-function hide(o) {
-	o.className = "hidden";
-	setTimeout(function() {
-    o.style.visibility = "hidden";
-	}, 500);
-}
-
-function show(o) {
-	o.style.visibility = "visible"
-	o.className = "shown";
-}
+}, 2000)
 
 single.onclick = (e) => {
-	hide(multi);
-	hide(settings);
-	hide(logo);
-	hide(single);
-	console.log(game);
-	game.className = "fight";
+	for (var i = menu.childNodes.length - 1; i >= 0; i--) {
+		menu.childNodes[i].className = "hidden";
+	}
+	clearInterval(menuRotate);
+	var ctx = scene.getContext('2d');
+	ctx.canvas.width = window.innerWidth;
+	ctx.canvas.height = window.innerHeight;
+	scene.style.visibility = "visible";
+	var i = 0;
+	setInterval( function() {
+		ryu[i] = new Image();
+		ryu[i].src = 'D:\\Dev\\wip\\brawler\\Brawler\\assets\\ryu\\stance-right-' + i + '.png'
+		ctx.clearRect(0, 0, scene.width, scene.height);
+		ctx.drawImage(ryu[i], 1300, 400, parseInt(ryu[i].width * 2.5), parseInt(ryu[i].height * 2.5));
+		if (i == 9) {
+			i = 0;
+		}
+		else {
+			i++;
+		}
+	}, 55);
 }
 
 quit.onclick = (e) => {
-	show(multi);
-	show(settings);
-	show(logo);
-	show(single);
+
 }
