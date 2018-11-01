@@ -1,0 +1,108 @@
+body{
+    font-family: 'Press Start 2P', cursive;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+section{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.player1{
+    width: 100%;
+    height: 100%;
+}
+.brawlers{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.player2{
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+.container{
+    display: grid;
+    grid-template: repeat(8, 65px) / repeat(3,130px);
+    grid-gap: 0px;
+    justify-items: center;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-template-areas: "B2 B1 B3"
+                         "B2 B1 B3"
+                         "B2 B4 B3"
+                         "B5 B4 B6"
+                         "B5 B7 B6"
+                         "B8 B7 B9"
+                         "B8 B10 B9"
+                         "B8 B10 B9";
+} 
+.B1{
+    grid-area: B1;
+}
+.B2{
+    grid-area: B2;
+    grid-row: 2/4;
+}
+.B3{
+    grid-area: B3;
+    grid-row: 2/4;
+}
+.B4{
+    grid-area: B4;
+}
+.B5{
+    grid-area: B5;
+}
+.B6{
+    grid-area: B6;
+}
+.B7{
+    grid-area: B7;
+}
+.B8{
+    grid-area: B8;
+    grid-row: 6/8;
+}
+.B9{
+    grid-area: B9;
+    grid-row: 6/8;
+}
+.B10{
+    grid-area: B10;
+}
+.FP{
+    color: red;
+}
+.SP{
+    color: blue;
+}
+.item{
+    background: blue;
+    border-radius: 50%;
+    width: 85%;
+    height: 85%;
+}
+.menu_select{
+    display:flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    margin-top:50px;
+    width: 100%;
+}
+figure{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
