@@ -84,7 +84,7 @@ section{
     color: blue;
 }
 .item{
-    background: blue;
+    background: greenyellow;
     border-radius: 50%;
     width: 85%;
     height: 85%;
@@ -97,26 +97,16 @@ section{
     margin-top:50px;
     width: 100%;
 }
-figure{
+figure {
     width: 100%;
     height: 100%;
     margin: 0;
     position: relative;
 }
-img{
+figure :nth-child(1) , figure :nth-child(2),figure :nth-child(3){
     width: 100%;
     height: 100%;
 }
-.gif1{
+.gif{
     visibility: hidden;
-}
-.gif2{
-    position: relative;
-    visibility: hidden;
-    bottom: 110px;
-}
-.gif3{
-    position: relative;
-    visibility: hidden;
-    bottom: 220px;
 }
