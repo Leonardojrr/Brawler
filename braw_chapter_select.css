@@ -3,6 +3,8 @@ body{
     width: 100%;
     height: 100%;
     margin: 0;
+    background: url("assets\\background.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 section{
     position: absolute;
@@ -78,10 +80,10 @@ section{
     grid-area: B10;
 }
 .FP{
-    color: red;
+    color: blue;
 }
 .SP{
-    color: blue;
+    color: red;
 }
 .item{
     background: greenyellow;
@@ -101,12 +103,28 @@ figure {
     width: 100%;
     height: 100%;
     margin: 0;
-    position: relative;
-}
-figure :nth-child(1) , figure :nth-child(2),figure :nth-child(3){
-    width: 100%;
-    height: 100%;
 }
 .gif{
     visibility: hidden;
+    position:  relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
+.icon{
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    position: relative;
+    bottom: 102px;
+    left: 12px;
+    text-align: center;
+    z-index: 0;
+}
+.player1, .player2{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
