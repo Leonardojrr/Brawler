@@ -63,16 +63,12 @@ var menuRotate = setInterval(function() {
 	switch(counter) {
 	  case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
 			logo.style.color = "white";
-			single.style.color = "white";
 			multi.style.color = "white";
-			settings.style.color = "white";
 			quit.style.color = "white";
 			break;
 		default: 
 			logo.style.color = "black";
-			single.style.color = "black";
 			multi.style.color = "black";
-			settings.style.color = "black";
 			quit.style.color = "black";
 			break;
 	}
