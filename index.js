@@ -1,7 +1,5 @@
 var logo = document.getElementById('logo');
-var single = document.getElementById('single');
 var multi = document.getElementById('multi');
-var	settings = document.getElementById('settings');
 var quit = document.getElementById('quit');
 var game = document.getElementById('game');
 var menu = document.getElementById('menu');
@@ -12,8 +10,8 @@ ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
 var p1 = new Array();
 var p2 = new Array();
-var p1name = "ryu";
-var p2name = "ken";
+var p1name = "ibuki";
+var p2name = "chunli";
 var intervalP1, intervalP2;
 var counter = 1;
 var p1x = window.innerWidth * 0.05;
@@ -27,24 +25,34 @@ var p2movingb = false;
 var raf, fpsInterval, then, now, elapsed;
 var currentStateP1, currentStateP2;
 var stance = { src: [ 'assets\\' + p1name + '\\stance-left-',  'assets\\' + p2name + '\\stance-right-'],
-							 frames1: 10,
-							 frames2: 10, 
+							 frames1: (p1name == "alex") ? 12 : (p1name == "chunli") ? 20 :
+							 					(p1name == "ibuki") ? 51 : (p1name == "twelve") ? 14 :
+							 					(p1name == "yang") ? 13 : (p1name == "yun") ? 27 : 10,
+							 frames2: (p2name == "alex") ? 12 : (p2name == "chunli") ? 20 :
+							 					(p2name == "ibuki") ? 51 : (p2name == "twelve") ? 14 :
+							 					(p2name == "yang") ? 13 : (p2name == "yun") ? 27 : 10, 
 							 images: [[],[]] }
 var punch = { src: ['assets\\' + p1name + '\\punch-left-', 'assets\\' + p2name + '\\punch-right-'],
-							 frames1: 5,
-							 frames2: 5, 
+							 frames1: (p1name == "alex") ? 8 : (p1name == "ibuki" || p1name == "yang") ? 11 : 
+											  (p1name == "twelve") ? 8 : (p1name == "yun") ? 10 : 5,
+							 frames2: (p2name == "alex") ? 8 : (p2name == "ibuki" || p2name == "yang") ? 11 : 
+											  (p2name == "twelve") ? 8 : (p2name == "yun") ? 10 : 5, 
 							 images: [[],[]] }
 var walkingf = { src: ['assets\\' + p1name + '\\forward-left-', 'assets\\' + p2name + '\\forward-right-'],
-							 frames1: 11,
-							 frames2: 11, 
+							 frames1: (p1name == "alex" || p1name == "yang" || p1name == "yung") ? 14 : 
+							 					(p1name == "chunli") ? 32 : (p1name == "ibuki") ? 16 : (p1name == "twelve") ? 20 : 11,
+							 frames2: (p2name == "alex" || p2name == "yang" || p2name == "yung") ? 14 : 
+							 					(p2name == "chunli") ? 32 : (p2name == "ibuki") ? 16 : (p2name == "twelve") ? 20 : 11, 
 							 images: [[],[]] }
 var walkingb = { src: ['assets\\' + p1name + '\\backward-left-', 'assets\\' + p2name + '\\backward-right-'],
-								 frames1: 11,
-								 frames2: 11,
+								 frames1: (p1name == "alex" || p1name == "yang" || p1name == "yung") ? 14 : 
+							 						(p1name == "chunli") ? 32 : (p1name == "ibuki") ? 16 : (p1name == "twelve") ? 20 : 11,
+								 frames2: (p2name == "alex" || p2name == "yang" || p2name == "yung") ? 14 : 
+							 						(p2name == "chunli") ? 32 : (p2name == "ibuki") ? 16 : (p2name == "twelve") ? 20 : 11,
 								 images: [[],[]] }
 var hit = { src: ['assets\\' + p1name + '\\hit-left-', 'assets\\' + p2name + '\\hit-right-'],
-						frames1: 4,
-						frames2: 4,
+						frames1: (p1name == "ibuki") ? 5 : 4,
+						frames2: (p2name == "ibuki") ? 5 : 4,
 					  images: [[],[]]}
 
 preloadAll();
@@ -93,21 +101,21 @@ function animate() {
 		ctx.clearRect(0, 0, scene.width, scene.height);
 		ctx.drawImage(p1[i], this.p1x - p1diff, this.p1y, p1[i].width * 2.5, p1[i].height * 2.5);
 		ctx.drawImage(p2[j], this.p2x - p2diff, this.p2y, p2[j].width * 2.5, p2[j].height * 2.5);
-		if ((currentStateP1 === punch || currentStateP1 === hit) && i == currentStateP1.frames - 1) {
+		if ((currentStateP1 === punch || currentStateP1 === hit) && i == currentStateP1.frames1 - 1) {
 			i = 0;
 			currentStateP1 = stance;
 		}
-		else if (i == currentStateP1.frames - 1 && (currentStateP1 !== punch || currentStateP1 !== hit)) {
+		else if (i == currentStateP1.frames1 - 1 && (currentStateP1 !== punch || currentStateP1 !== hit)) {
 			i = 0;
 		}
 		else {
 			i++;
 		}
-		if ((currentStateP2 === punch || currentStateP2 === hit) && j == currentStateP2.frames - 1) {
+		if ((currentStateP2 === punch || currentStateP2 === hit) && j == currentStateP2.frames2 - 1) {
 			j = 0;
 			currentStateP2 = stance;
 		}
-		else if (j == currentStateP2.frames - 1 && (currentStateP2 !== punch || currentStateP2 !== hit)) {
+		else if (j == currentStateP2.frames2 - 1 && (currentStateP2 !== punch || currentStateP2 !== hit)) {
 			j = 0;
 		}
 		else {
@@ -120,7 +128,7 @@ function animate() {
 	}
 }
 
-single.onclick = (e) => {
+multi.onclick = (e) => {
 	for (let k = menu.childNodes.length - 1; k >= 0; k--) {
 		menu.childNodes[k].className = "hidden";
 	}
@@ -211,7 +219,7 @@ function preloadAll() {
 		punch.images[0][o] = new Image();
 		punch.images[0][o].src = punch.src[0] + o + '.png';
 	}
-	for (let o = 0; 0 < punch.frames2; o++) {
+	for (let o = 0; o < punch.frames2; o++) {
 		punch.images[1][o] = new Image();
 		punch.images[1][o].src = punch.src[1] + o + '.png';
 	}
@@ -243,7 +251,7 @@ function preloadAll() {
 		hit.images[0][o] = new Image();
 		hit.images[0][o].src = hit.src[0] + o + '.png';
 	}
-	for (let o = 0; hit.frames2; o++) {
+	for (let o = 0; o < hit.frames2; o++) {
 		hit.images[1][o] = new Image();
 		hit.images[1][o].src = hit.src[1] + o + '.png';
 	}
