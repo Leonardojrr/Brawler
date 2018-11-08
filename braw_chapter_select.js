@@ -5,6 +5,8 @@ var p1_image = document.querySelector("#img_p1")
 var p2_image = document.querySelector("#img_p2")
 var p1_gif = document.querySelector("#P1gif")
 var p2_gif = document.querySelector("#P2gif")
+var p1_name = document.querySelector("#FP")
+var p2_name = document.querySelector("#SP")
 var url_gif = ["assets\\selectorp1.gif","assets\\selectorp2.gif","assets\\selectorp3.gif"]
 var url_chapter_select = [["assets\\gifs\\ryu1.gif","assets\\gifs\\ryu2.gif"],["assets\\gifs\\ken1.gif","assets\\gifs\\ken2.gif"],["assets\\gifs\\chun-li1.gif","assets\\gifs\\chun-li2.gif"],["assets\\gifs\\alex1.gif","assets\\gifs\\alex2.gif"],["assets\\gifs\\sean1.gif","assets\\gifs\\sean2.gif"],["assets\\gifs\\yun1.gif","assets\\gifs\\yun2.gif"],["assets\\gifs\\yang1.gif","assets\\gifs\\yang2.gif"],["assets\\gifs\\ibuki1.gif","assets\\gifs\\ibuki2.gif"],["assets\\gifs\\twelve1.gif","assets\\gifs\\twelve2.gif"],["assets\\gifs\\akuma1.gif","assets\\gifs\\akuma2.gif"]]
 
@@ -276,6 +278,3 @@ onkeydown = e => {
             p2_gif.src = url_chapter_select[p2_selected_brawler][1]
     }
 }
-
-console.log(window.innerWidth)
-console.log(window.innerHeight)
