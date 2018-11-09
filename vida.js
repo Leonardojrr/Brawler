@@ -23,10 +23,6 @@ P2health(p2_health_righ, health_top, p2_health_left_top, health_top, p2_health_l
 health_border(p2_health_righ, health_top, p2_health_left_top, health_top, p2_health_left_bot, health_bot, p2_health_righ, health_bot, p2_health_righ, health_top,6,"#565653")
 
 
-
-
-
-
 function P1health(tlx,tly,trx,tri,brx,bry,blx,bly,endx,endy){
     ctx.beginPath()
     ctx.fillStyle = grd1

@@ -322,6 +322,108 @@ var p1movingb = false;
 var p2movingb = false;
 var raf, fpsInterval, then, now, elapsed;
 var currentStateP1, currentStateP2, stance, punch, hit, walkingf, walkingb, p1name, p2name;
+var grd1 = ctx.createLinearGradient(150, 0, 500, 0)
+var grd2 = ctx.createLinearGradient(1400, 0, 1775, 0)
+var health_top = window.innerHeight*0.05
+var health_bot = window.innerHeight*0.1
+var healthp1 = 1
+var healthp2 = 1
+var p1_health_left = window.innerWidth*0.04
+var p1_health_righ_top = window.innerWidth*(0.45*healthp1)
+var p1_health_righ_bot = window.innerWidth*(0.41*healthp1)
+var p2_health_righ = window.innerWidth*0.96
+var p2_health_left_top = window.innerWidth*0.55*healthp2
+var p2_health_left_bot = window.innerWidth*0.59*healthp2
+var a = window.innerWidth*0.45
+var b = window.innerWidth*0.41
+var c = window.innerWidth*0.55
+var d = window.innerWidth*0.59
+
+grd1.addColorStop(0, "#c11728")
+grd1.addColorStop(1, "#ffe928")
+grd2.addColorStop(0, "#ffe928")
+grd2.addColorStop(1, "#c11728")
+
+
+function endgame(){
+    if(healthp1 === 0 || healthp2 === 2){
+        scene.style.visibility = "hidden"
+        cancelAnimationFrame(raf)
+        section.className ="section shownFlex"
+    }
+}
+function downp1health(){
+    p1_health_righ_top = window.innerWidth*(0.45*healthp1)
+    if(p1_health_righ_top <= window.innerWidth*0.04){
+        p1_health_righ_top = window.innerWidth*0.04
+        p1_health_righ_bot = window.innerWidth*0.04
+    }
+    else if(p1_health_righ_top <= window.innerWidth*0.41){
+        p1_health_righ_top = window.innerWidth*(0.45*healthp1)
+        p1_health_righ_bot = window.innerWidth*(0.45*healthp1)
+    }
+    
+}
+function downp2health(){
+    p2_health_left_top = window.innerWidth*(0.55*healthp2)
+    if(p2_health_left_top >= window.innerWidth*0.96){
+        p2_health_left_top = window.innerWidth*0.96
+        p2_health_left_bot = window.innerWidth*0.96
+    }
+    else if(p2_health_left_top >= window.innerWidth*0.59){
+        p2_health_left_top = window.innerWidth*(0.55*healthp2)
+        p2_health_left_bot = window.innerWidth*(0.55*healthp2)
+    }
+    
+}
+function P1health(tlx,tly,trx,tri,brx,bry,blx,bly,endx,endy){
+    ctx.beginPath()
+    ctx.fillStyle = grd1
+    // esquina superior izquierda
+    ctx.moveTo(tlx, tly)
+    // esquina superior derecha
+    ctx.lineTo(trx,tri)
+    // esquina inferior derecha
+    ctx.lineTo(brx,bry)
+    // esquina inferior izquierda
+    ctx.lineTo(blx,bly)
+    // cierre
+    ctx.lineTo(endx,endy)
+    ctx.closePath()
+    ctx.fill()
+}
+function P2health(tlx,tly,trx,tri,brx,bry,blx,bly,endx,endy){
+    ctx.beginPath()
+    ctx.fillStyle = grd2
+    // esquina superior izquierda
+    ctx.moveTo(tlx, tly)
+    // esquina superior derecha
+    ctx.lineTo(trx,tri)
+    // esquina inferior derecha
+    ctx.lineTo(brx,bry)
+    // esquina inferior izquierda
+    ctx.lineTo(blx,bly)
+    // cierre
+    ctx.lineTo(endx,endy)
+    ctx.closePath()
+    ctx.fill()
+}
+function health_border(tlx,tly,trx,tri,brx,bry,blx,bly,endx,endy,width,color){
+    ctx.beginPath()
+    ctx.lineWidth= width
+    ctx.strokeStyle= color
+    ctx.moveTo(tlx, tly)
+    // esquina superior derecha
+    ctx.lineTo(trx,tri)
+    // esquina inferior derecha
+    ctx.lineTo(brx,bry)
+    // esquina inferior izquierda
+    ctx.lineTo(blx,bly)
+    // cierre
+    ctx.lineTo(endx,endy)
+    ctx.stroke()
+    ctx.closePath()
+}
 
 var menuRotate = setInterval(function() {
 	counter++;
@@ -350,9 +452,11 @@ function init() {
 let j = 0;
 let i = 0;
 function animate() {
+    endgame()
 	let p2diff = (currentStateP2 === punch && p2name === "twelve") ? window.innerWidth * 0.15 : (currentStateP2 === punch) ? window.innerWidth * 0.069
 	 : (currentStateP2 === walkingf) ? window.innerWidth * 0.04 : (currentStateP2 === hit && p2name !== "twelve") ? window.innerWidth * 0.04 : 0;
-	let p1diff = (currentStateP1 === walkingb) ? window.innerWidth * 0.04 : (currentStateP1 === hit) ? window.innerWidth * 0.07 : 0;
+    let p1diff = (currentStateP1 === walkingb) ? window.innerWidth * 0.04 : (currentStateP1 === hit) ? window.innerWidth * 0.07 : 0;
+
 	raf = requestAnimationFrame(animate);
 	now = Date.now();
 	elapsed = now - then;
@@ -362,20 +466,27 @@ function animate() {
 		p2[j] = currentStateP2.images[1][j];
 		ctx.clearRect(0, 0, scene.width, scene.height);
 		ctx.drawImage(p1[i], this.p1x - p1diff, this.p1y, p1[i].width * 2.5, p1[i].height * 2.5);
-		ctx.drawImage(p2[j], this.p2x - p2diff, this.p2y, p2[j].width * 2.5, p2[j].height * 2.5);
+        ctx.drawImage(p2[j], this.p2x - p2diff, this.p2y, p2[j].width * 2.5, p2[j].height * 2.5);
+
+    P1health(p1_health_left, health_top, p1_health_righ_top, health_top, p1_health_righ_bot, health_bot, p1_health_left, health_bot, p1_health_left, health_top)
+    health_border(p1_health_left, health_top, a, health_top, b, health_bot, p1_health_left, health_bot, p1_health_left, health_top,6,"#565653")
+
+    P2health(p2_health_righ, health_top, p2_health_left_top, health_top, p2_health_left_bot, health_bot, p2_health_righ, health_bot, p2_health_righ, health_top)
+    health_border(p2_health_righ, health_top, c, health_top, d, health_bot, p2_health_righ, health_bot, p2_health_righ, health_top,6,"#565653")
+
 		if ((currentStateP1 === punch || currentStateP1 === hit) && i == currentStateP1.frames1 - 1) {
 			i = 0;
-			currentStateP1 = stance;
+            currentStateP1 = stance;
 		}
 		else if (i == currentStateP1.frames1 - 1 && (currentStateP1 !== punch || currentStateP1 !== hit)) {
-			i = 0;
+            i = 0;
 		}
 		else {
-			i++;
+            i++;
 		}
 		if ((currentStateP2 === punch || currentStateP2 === hit) && j == currentStateP2.frames2 - 1) {
 			j = 0;
-			currentStateP2 = stance;
+            currentStateP2 = stance;
 		}
 		else if (j == currentStateP2.frames2 - 1 && (currentStateP2 !== punch || currentStateP2 !== hit)) {
 			j = 0;
@@ -446,12 +557,16 @@ startGame.onclick = (e) => {
 				p2movingb = false;
 				p2movingf = false;
 				j = 0;
-				currentStateP2 = hit;
+                currentStateP2 = hit;
+                
+                 healthp2 += 0.05
+                 downp2health()
+                 endgame()
 		  }
 			if (p1movingf) { p1movingf = false; }
 			if (p1movingb) { p1movingb = false; }
 			i = 0;
-			currentStateP1 = punch;
+            currentStateP1 = punch;
 		}
 		if (e.keyCode == 68 && !p1movingf && !p1movingb && currentStateP1 !== hit) {
 			p1movingf = true;
@@ -468,7 +583,11 @@ startGame.onclick = (e) => {
 				p1movingf = false;
 				p1movinb = false;
 				i = 0;
-				currentStateP1 = hit;
+                currentStateP1 = hit;
+                
+            healthp1 -= 0.05
+            downp1health()
+            endgame()
 			 }
 			if (p2movingb) { p2movingb = false; }
 			if (p2movingf) { p2movingf = false; }
