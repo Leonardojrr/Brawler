@@ -346,8 +346,9 @@ grd2.addColorStop(1, "#c11728")
 
 
 function endgame(){
-    if(healthp1 === 0 || healthp2 === 2){
-        scene.style.visibility = "hidden"
+    console.log(`Vida p1:${healthp1} Vida p2:${healthp2}`)
+    if(healthp1 <= 0.1 || healthp2 >= 1.75){
+        scene.style.visibility = "none"
         cancelAnimationFrame(raf)
         section.className ="section shownFlex"
     }
